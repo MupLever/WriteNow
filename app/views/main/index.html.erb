@@ -1,0 +1,7 @@
+
+<h1>Swipe</h1>
+<% if signed_in? %>
+
+    <% else %>
+    <p><a href='http://localhost:3000/session/new' onmouseup="PaintHref(event, '#ffc107', '#0d6efd')" onmousedown="PaintHref(event, '#ffc107', '#0d6efd')"><%= t("pages.index.authorization") %></a></p>
+<% end %>
