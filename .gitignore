@@ -7,6 +7,10 @@
 #Ignore publickey
 publickey
 
+
+#Ignore node_modules
+node_modules
+
 # Ignore bundler config.
 /.bundle
 
