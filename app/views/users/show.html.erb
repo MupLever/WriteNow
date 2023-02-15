@@ -1,0 +1,17 @@
+<h1>Users</h1>
+    <hr/>
+    <article class="card">
+        <div class="card-header bg-dark text-warning">
+            <h3>Full name: &nbsp;&nbsp;<%= @user.name %>&nbsp;&nbsp;<%= @user.surname %></h3>
+            <hr/>
+        </div>
+  
+        <div class="card-body bg-dark text-white">
+            <hr/>
+            <pre><%= @user.information %></pre>
+            <form action=<%="#{current_user.id}?user_id=#{@user.id}"%> method="put">
+                <input type="submit" class="btn btn-danger" value="Like">
+            </form>
+        </div>
+    </article>
+<hr/>

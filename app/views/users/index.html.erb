@@ -2,13 +2,12 @@
 <% @users.each do |user| %>
     <hr/>
     <article class="card">
-        <div class="card-header bg-dark text-warning">
-            <h3><%= t("users.index.author") %>:&nbsp;&nbsp;<%= user.name %></h3>
+         <div class="card-header bg-dark text-warning">
+            <%= link_to "#{user.name} #{user.surname}", user_path(user.id), class: "nav-link px-2 text-white" %>
             <hr/>
         </div>
   
         <div class="card-body bg-dark text-white">
-            <h2><%= user.surname %></h2>
             <hr/>
             <pre><%= user.information %></pre>
             <form action=<%="#{current_user.id}?user_id=#{user.id}"%> method="put">
