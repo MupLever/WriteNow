@@ -1,0 +1,22 @@
+<h1>Users</h1>
+<% @users.each do |user| %>
+    <hr/>
+    <article class="card">
+        <div class="card-header bg-dark text-warning">
+            <h3><%= t("users.index.author") %>:&nbsp;&nbsp;<%= user.name %></h3>
+            <hr/>
+        </div>
+  
+        <div class="card-body bg-dark text-white">
+            <h2><%= user.surname %></h2>
+            <hr/>
+            <pre><%= user.information %></pre>
+            <form action=<%="#{current_user.id}?user_id=#{user.id}"%> method="put">
+                <input type="submit" class="btn btn-danger" value="Like">
+            </form>
+        </div>
+
+
+    </article>
+<% end %>
+<hr/>
