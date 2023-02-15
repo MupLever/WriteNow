@@ -1,24 +1,17 @@
-# README
+# WriteNow
+Dating site, an analogue of tinder, but for friends
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ruby version
+3.0.2
+# Rails version
+7.0
 
-Things you may want to cover:
+# How to run the test site
+install yarn, nodejs<br />
+git clone git@github.com:MupLever/Write_Now.git<br />
+gem install bundle<br />
+bundle
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Database creation
+rails db:create<br />
+rails db:migrate
