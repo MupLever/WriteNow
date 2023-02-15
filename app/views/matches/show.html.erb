@@ -1,7 +1,32 @@
 <h1>Users</h1>
     <hr/>
-    <article class="card">
+    <% @messages.each do |message| %>
+  <hr/>
+  <article class="card bg-dark text-warning">
+    <div class="card-header">
+      <h4>Author</h4>
+      <hr/>
+    </div>
+    <div class="card-body bg-dark text-white">
+      <pre><%= message.body %></pre>
+      <hr/>
+      <% end %>
 
+    <article class="card">
+        <div class="card-header bg-dark text-warning">
+            <h3>Full name: &nbsp;&nbsp;<%=  %>&nbsp;&nbsp;<%=  %></h3>
+            <hr/>
+        </div>
+  
+        <div class="card-body bg-dark text-white">
+        <%= form_with model: @message, remote: true do |form| %>
+          <div class="mb-3 row"> 
+            <div class="col-sm-10">
+              <%= form.text_area :body, required: true, minlegth: 4, placeholder: "What are you doing?", class: "form-control" %>
+            </div>
+          </div>
+        <%= form.submit "Submit", class: "btn btn-success" %>
+      <% end %>
         </div>
     </article>
 <hr/>
