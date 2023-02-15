@@ -11,16 +11,19 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_15_085252) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "matches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users"
+    t.integer "users", array: true
     t.index ["users"], name: "index_matches_on_users"
   end
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
-    t.integer "match_id", null: false
+    t.bigint "match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_messages_on_match_id"
@@ -30,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_085252) do
     t.string "email", null: false
     t.string "name"
     t.string "surname"
-    t.integer "likes"
+    t.integer "likes", array: true
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
