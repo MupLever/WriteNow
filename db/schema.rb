@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_164612) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_085252) do
   create_table "matches", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_matches_on_user_id"
+    t.integer "users"
+    t.index ["users"], name: "index_matches_on_users"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -38,6 +38,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_164612) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "matches", "users"
   add_foreign_key "messages", "matches"
 end
