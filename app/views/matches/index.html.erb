@@ -1,7 +1,15 @@
 <h1>Matches</h1>
-<% @matches.each do |match| %>
-    <article class="card">
-    match + <%= match.id %>
-    </article>
-<% end %>
-<hr/>
+<article class="card bg-dark text-warning">
+    <% @matches.each do |match| %>
+        <!--<%= user = match.users.reject { |user| user == current_user}.first %> -->
+        <div class="card-header">
+            <%= link_to "#{user.name }", match_path(match), class: "btn btn-dark text-warning me-2" %>
+            <hr/>
+        </div>
+        <div class="card-body bg-dark text-white">
+            <h3>Information</h3>
+            <pre><%= user.information %></pre>
+            <hr/>
+        </div>
+    <% end %>
+</article>

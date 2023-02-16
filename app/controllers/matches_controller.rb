@@ -2,6 +2,7 @@ class MatchesController < ApplicationController
   before_action :before_recieve, only: :show
   before_action :in_chat_room, only: :show
   before_action :no_authentication, only: %i[new create]
+  before_action :authentication, only: %i[index show]
 
   def create; end
 
