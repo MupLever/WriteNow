@@ -1,22 +1,24 @@
 <h1>Users</h1>
-<% @users.each do |user| %>
-    <% unless user.id == current_user.id %>
-        <hr/>
-        <article class="card">
-            <div class="card-header bg-dark text-warning">
-                <%= link_to "#{user.name} #{user.surname}", user_path(user.id), class: "nav-link px-2 text-white" %>
-                <hr/>
-            </div>
-    
-            <div class="card-body bg-dark text-white">
-                <hr/>
-                <pre><%= user.information %></pre>
-                <form action=<%="#{current_user.id}?user_id=#{user.id}"%> method="put">
-                    <input type="submit" class="btn btn-danger" value="Like">
-                </form>
-                <%= button_to "Like" , like_user_path(user.id), class: "btn btn-danger" %>
-            </div>
-        </article>
+<% if signed_in? %>
+    <% @users.each do |user| %>
+        <% unless user.id == current_user.id %>
+            <hr/>
+            <article class="card">
+                <div class="card-header bg-dark text-warning">
+                    <%= link_to "#{user.name} #{user.surname}", user_path(user.id), class: "nav-link px-2 text-white" %>
+                    <hr/>
+                </div>
+        
+                <div class="card-body bg-dark text-white">
+                    <hr/>
+                    <pre><%= user.information %></pre>
+                    <%= button_to "Like" , like_user_path(user.id), class: "btn btn-danger" %>
+                </div>
+            </article>
+        <% end %>
     <% end %>
+    <hr/>
+<% else %>
+    <p><a href='http://localhost:3000/session/new' onmouseup="PaintHref(event, '#ffc107', '#0d6efd')" onmousedown="PaintHref(event, '#ffc107', '#0d6efd')"></a></p>
 <% end %>
-<hr/>
+

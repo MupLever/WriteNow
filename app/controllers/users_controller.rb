@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :no_authentication, only: %i[new create]
-  before_action :authentication, only: %i[index show update]
+  before_action :authentication, only: %i[show update]
   before_action :before_recieve, only: %i[show update]
   def new
     @user = User.new
