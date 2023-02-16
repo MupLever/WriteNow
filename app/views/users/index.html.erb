@@ -14,6 +14,7 @@
                 <form action=<%="#{current_user.id}?user_id=#{user.id}"%> method="put">
                     <input type="submit" class="btn btn-danger" value="Like">
                 </form>
+                <%= button_to "Like" , like_user_path(user.id), class: "btn btn-danger" %>
             </div>
         </article>
     <% end %>

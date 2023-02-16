@@ -24,21 +24,28 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def update
+
+  def like
+    p "*" * 90
     liked_user_id = recieve_params_for_update
-    likes = current_user.likes.to_a
+    likes = current_user.likes
 
     unless likes.include?(liked_user_id)
 
       likes << liked_user_id
-      current_user.update_column(:likes, likes)
+      current_user.update(likes: likes)
+      liked_user = User.find(liked_user_id)
 
-      if User.find(liked_user_id).likes.to_a.include?(current_user.id)
-        match = Match.new(users: [liked_user_id, current_user.id])
-        redirect_to matches_path if match.save
+      if liked_user.likes.include?(current_user.id)
+        Match.create(users: [current_user, liked_user])
+        redirect_to matches_path
       end
       
     end
+  end
+
+  def update
+    
   end
 
   def recieve_params_for_new
@@ -46,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def recieve_params_for_update
-    Integer(params[:user_id])
+    params[:id].to_i
   end
 
   def before_recieve

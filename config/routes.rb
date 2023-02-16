@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :index, :update]
   resources :matches, only: [:create, :destroy, :show, :index] 
 
+  post "users/:id/like", to: "users#like", as: "like_user"
   root 'main#index'
 end
