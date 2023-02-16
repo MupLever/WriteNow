@@ -12,7 +12,7 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @matches = current_user.matches.all.to_a#.select {|elem| elem.user_id != current_user.id }
+    @matches = current_user.matches.all
   end
 
   def destroy

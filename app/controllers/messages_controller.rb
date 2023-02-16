@@ -3,9 +3,8 @@ class MessagesController < ApplicationController
 
     def create
         message = @match.messages.build recieve_params_for_new
-        if message.save
-            redirect_to match_path(@match)
-        end
+        
+        redirect_to match_path(@match) if message.save
     end
 
     def recieve_params_for_new
