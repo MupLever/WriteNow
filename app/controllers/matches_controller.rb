@@ -9,7 +9,7 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @matches = Match.all.to_a.select {|elem| elem.users.include?(current_user.id) }
+    @matches = current_user.matches.all.to_a#.select {|elem| elem.user_id != current_user.id }
   end
 
   def destroy
@@ -18,7 +18,7 @@ class MatchesController < ApplicationController
   end
 
   def in_chat_room
-    unless@match.users.include?(current_user.id)
+    unless @match.users.include?(current_user.id)
       redirect_to matches_path
     end
   end
