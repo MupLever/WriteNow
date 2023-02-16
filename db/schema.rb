@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_141715) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_163127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,7 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_141715) do
     t.bigint "match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["match_id"], name: "index_messages_on_match_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_141715) do
   end
 
   add_foreign_key "messages", "matches"
+  add_foreign_key "messages", "users"
   add_foreign_key "users_matches", "matches"
   add_foreign_key "users_matches", "users"
 end
