@@ -19,7 +19,7 @@ class MatchesController < ApplicationController
 
   def in_chat_room
     unless@match.users.include?(current_user.id)
-      redirect_to root_path
+      redirect_to matches_path
     end
   end
   

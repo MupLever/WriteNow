@@ -1,21 +1,21 @@
 <h1>Users</h1>
 <% @users.each do |user| %>
-    <hr/>
-    <article class="card">
-         <div class="card-header bg-dark text-warning">
-            <%= link_to "#{user.name} #{user.surname}", user_path(user.id), class: "nav-link px-2 text-white" %>
-            <hr/>
-        </div>
-  
-        <div class="card-body bg-dark text-white">
-            <hr/>
-            <pre><%= user.information %></pre>
-            <form action=<%="#{current_user.id}?user_id=#{user.id}"%> method="put">
-                <input type="submit" class="btn btn-danger" value="Like">
-            </form>
-        </div>
-
-
-    </article>
+    <% unless user.id == current_user.id %>
+        <hr/>
+        <article class="card">
+            <div class="card-header bg-dark text-warning">
+                <%= link_to "#{user.name} #{user.surname}", user_path(user.id), class: "nav-link px-2 text-white" %>
+                <hr/>
+            </div>
+    
+            <div class="card-body bg-dark text-white">
+                <hr/>
+                <pre><%= user.information %></pre>
+                <form action=<%="#{current_user.id}?user_id=#{user.id}"%> method="put">
+                    <input type="submit" class="btn btn-danger" value="Like">
+                </form>
+            </div>
+        </article>
+    <% end %>
 <% end %>
 <hr/>

@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :no_authentication, only: %i[new create]
+  before_action :authentication, only: %i[index show update]
   before_action :before_recieve, only: %i[show update]
   def new
     @user = User.new
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
   def show; end
 
   def index
-    @users = User.all.reject { |user| user.id == current_user.id }
+    @users = User.all
   end
 
   def update
@@ -32,9 +33,9 @@ class UsersController < ApplicationController
       likes << liked_user_id
       current_user.update_column(:likes, likes)
 
-      if User.find(liked_user_id).likes.include?(current_user.id)
+      if User.find(liked_user_id).likes.to_a.include?(current_user.id)
         match = Match.new(users: [liked_user_id, current_user.id])
-        redirect_to match_path if match.save
+        redirect_to matches_path if match.save
       end
       
     end
