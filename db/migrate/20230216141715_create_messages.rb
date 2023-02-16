@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration[7.0]
     create_table :messages do |t|
       t.text :content
       t.belongs_to :match, null: false, foreign_key: true
+
       t.timestamps
     end
   end

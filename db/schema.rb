@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_183053) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_141715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "matches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users", array: true
-    t.index ["users"], name: "index_matches_on_users"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -26,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_183053) do
     t.bigint "match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["match_id"], name: "index_messages_on_match_id"
   end
 
@@ -34,13 +31,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_183053) do
     t.string "email", null: false
     t.string "name"
     t.string "surname"
-    t.integer "likes", array: true
+    t.integer "likes", default: [], array: true
+    t.text "information"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "information"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "users_matches", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "match_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_users_matches_on_match_id"
+    t.index ["user_id"], name: "index_users_matches_on_user_id"
+  end
+
   add_foreign_key "messages", "matches"
+  add_foreign_key "users_matches", "matches"
+  add_foreign_key "users_matches", "users"
 end
