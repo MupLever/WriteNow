@@ -2,8 +2,9 @@
 
 class UsersController < ApplicationController
   before_action :no_authentication, only: %i[new create]
-  before_action :authentication, only: %i[show update]
-  before_action :before_recieve, only: %i[show update]
+  before_action :authentication, only: %i[show edit update like]
+  before_action :before_recieve, only: %i[show]
+
   def new
     @user = User.new
   end
@@ -18,16 +19,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    p "*" * 80
+    pp recieve_params_for_update
+    p "*" * 80
+    if current_user.update recieve_params_for_update
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
+
+  def edit; end
+
   def show; end
 
   def index
-    @users = User.all
+    @users = User.all.to_a.reject { |elem| current_user&.likes&.include?(elem.id) } 
   end
 
-
   def like
-    p "*" * 90
-    liked_user_id = recieve_params_for_update
+    liked_user_id = recieve_params_for_like
     likes = current_user.likes
 
     unless likes.include?(liked_user_id)
@@ -39,13 +51,11 @@ class UsersController < ApplicationController
       if liked_user.likes.include?(current_user.id)
         Match.create(users: [current_user, liked_user])
         redirect_to matches_path
+      else
+        redirect_to users_path
       end
       
     end
-  end
-
-  def update
-    
   end
 
   def recieve_params_for_new
@@ -53,6 +63,10 @@ class UsersController < ApplicationController
   end
 
   def recieve_params_for_update
+    {email: params[:email], name: params[:name], surname: params[:surname], information: params[:information], password: params[:password], password_confirmation: params[:password_confirmation]}
+  end
+
+  def recieve_params_for_like
     params[:id].to_i
   end
 
