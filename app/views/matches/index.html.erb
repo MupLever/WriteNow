@@ -1,15 +1,20 @@
 <h1>Matches</h1>
-<article class="card bg-dark text-warning">
     <% @matches.each do |match| %>
         <!--<%= user = match.users.reject { |user| user == current_user}.first %> -->
-        <div class="card-header">
-            <%= link_to "#{user.name }", match_path(match), class: "btn btn-dark text-warning me-2" %>
-            <hr/>
-        </div>
-        <div class="card-body bg-dark text-white">
-            <h3>Information</h3>
-            <pre><%= user.information %></pre>
-            <hr/>
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <h1><%= link_to "#{user.name} #{user.surname}", match_path(match), class: "btn btn-light text-dark me-2" %></h1>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                    <div class="d-flex justify-content-between">
+                        <span class="d-block">@<%= "#{user.name} #{user.surname}" %></span><hr/>
+                        <%= button_to "Like" , like_user_path(user.id), class: "btn btn-danger" %>
+                    </div>
+
+                    <pre><%= user.information %></pre>
+                </div>
+            </div>
         </div>
     <% end %>
-</article>
+

@@ -2,9 +2,9 @@
 
 <h1 class="mb-4">Authorization</h1>
 <div class='article'>
-    <div class="card-body bg-dark text-white">
-        <%= form_with url: session_path do |f| %>
-        <div class="mb-3 row">
+    <div class="card-body bg-light text-dark">
+        <%= form_with url: session_path, class: "p-2" do |f| %>
+        <div class="mb-3row">
             <%= f.label "Email", class: "col-sm-2 col-form-label" %><br/>
             <div class="col-sm-10">
                 <%= f.email_field :email, required: true, minlegth: 7, placeholder: "example@email.com", class: "form-control" %>
@@ -16,7 +16,7 @@
                 <%= f.password_field :password, required: true, minlegth: 12,  class: "form-control" %>
             </div>
         </div>
-        <%= f.submit "Log in", class: "btn btn-success" %>
+        <%= f.submit "Log in", class: "btn btn-success mb-2" %>
         <% end %>
     </div>
 </div>
