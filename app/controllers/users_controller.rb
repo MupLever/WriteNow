@@ -20,11 +20,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    p "*" * 80
-    pp recieve_params_for_update
-    p "*" * 80
     if current_user.update recieve_params_for_update
       redirect_to root_path
+      flash[:success] = 'You have successfully edited profile.'
     else
       render :edit
     end
