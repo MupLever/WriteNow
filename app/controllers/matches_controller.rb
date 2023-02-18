@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-  before_action :before_recieve, only: :show
+  before_action :receive_before, only: :show
   before_action :no_authentication, only: %i[new create]
   before_action :authentication, only: %i[index show]
 
@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
     flash[:success] = 'The match was successfully deleted'
   end
   
-  def before_recieve
+  def receive_before
     @match = Match.find params[:id]
   end
 end

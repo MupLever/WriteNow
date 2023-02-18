@@ -9,7 +9,6 @@
                 <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                     <div class="d-flex justify-content-between">
                         <span class="d-block">@<%= "#{user.name} #{user.surname}" %></span><hr/>
-                        <%= button_to "Like" , like_user_path(user.id), class: "btn btn-danger" %>
                     </div>
 
                     <pre><%= user.information %></pre>

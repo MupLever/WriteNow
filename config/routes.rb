@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create, :destroy] 
   end
 
-  post "users/:id/edit", to: "users#update"
+  # post "users/:id/edit", to: "users#update"
   post "users/:id/like", to: "users#like", as: "like_user"
   root 'users#index'
 end

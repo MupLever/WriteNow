@@ -3,14 +3,15 @@
 class UsersController < ApplicationController
   before_action :no_authentication, only: %i[new create]
   before_action :authentication, only: %i[show edit update like]
-  before_action :before_recieve, only: %i[show]
+  before_action :receive_before, only: %i[edit update show]
+  before_action :is_it_possible_to_edit, only: :update
 
   def new
     @user = User.new
   end
 
   def create
-    @user = User.new recieve_params_for_new
+    @user = User.new receive_params_for_new
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update recieve_params_for_update
+    if @user.update receive_params_for_update
       redirect_to root_path
       flash[:success] = 'You have successfully edited profile.'
     else
@@ -33,11 +34,11 @@ class UsersController < ApplicationController
   def show; end
 
   def index
-    @users = User.all.to_a.reject { |elem| current_user&.likes&.include?(elem.id) } 
+    @users = User.all.to_a.reject { |user| current_user&.likes&.include?(user.id) } 
   end
 
   def like
-    liked_user_id = recieve_params_for_like
+    liked_user_id = receive_params_for_like
     likes = current_user.likes
 
     unless likes.include?(liked_user_id)
@@ -56,19 +57,27 @@ class UsersController < ApplicationController
     end
   end
 
-  def recieve_params_for_new
+  def receive_before
+    @user = User.find params[:id]
+  end
+
+  def receive_params_for_new
     params.require(:user).permit(:email, :name, :surname, :password, :password_confirmation)
   end
 
-  def recieve_params_for_update
-    {email: params[:email], name: params[:name], surname: params[:surname], information: params[:information], password: params[:password], password_confirmation: params[:password_confirmation]}
+  def receive_params_for_update
+    params.require(:user).permit(:email, :name, :surname, :information, :password, :password_confirmation)
   end
 
-  def recieve_params_for_like
+  def receive_params_for_like
     params[:id].to_i
   end
 
-  def before_recieve
-    @user = User.find params[:id]
+  def is_it_possible_to_edit
+    return if current_user == @user
+
+    flash[:warning] = 'you can\'t edit other users'
+    redirect_to root_path
   end
+
 end
