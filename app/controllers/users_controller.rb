@@ -16,7 +16,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      render :new
+      redirect_to new_user_path
+      flash[:danger] = 'An error has occurred, perhaps a user with such an email is already registered'
     end
   end
 
@@ -38,21 +39,8 @@ class UsersController < ApplicationController
   end
 
   def like
-    liked_user_id = receive_params_for_like
-    likes = current_user.likes
-
-    return if likes.include?(liked_user_id)
-
-    likes << liked_user_id
-    current_user.update(likes: likes)
-    liked_user = User.find(liked_user_id)
-
-    if liked_user.likes.include?(current_user.id)
-      Match.create(users: [current_user, liked_user])
-      redirect_to matches_path
-    else
-      redirect_to users_path
-    end
+    current_user.like(User.find receive_liked_user_id)
+    redirect_to users_path
   end
 
   def receive_before
@@ -67,7 +55,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :name, :surname, :information, :password, :password_confirmation)
   end
 
-  def receive_params_for_like
+  def receive_liked_user_id
     params[:id].to_i
   end
 
