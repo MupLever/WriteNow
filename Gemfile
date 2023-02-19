@@ -15,7 +15,7 @@ gem "sprockets-rails"
 # Use pg as the database for Active Record
 gem "pg"
 
-#Use haml as haiku
+#Use haml to write html like a haiku
 gem "haml-rails"
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -57,6 +57,10 @@ gem "sassc-rails"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "rspec-rails"
+  gem "rubocop"
+  gem "rubocop-rspec"
+  gem "rubocop-performance"
 end
 
 group :development do
