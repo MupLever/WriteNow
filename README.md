@@ -17,3 +17,6 @@ yarn upgrade
 # Database creation
 rails db:create<br />
 rails db:migrate
+
+# Start test 
+bundle exec rspec
