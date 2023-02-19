@@ -6,42 +6,42 @@
             <div class="mb-3 row">
                 <%= f.label "Email", class: "col-sm-2 col-form-label" %><br/>
                     <div class="col-sm-10">
-                        <%= f.email_field :email, required: true, minlegth: 7, value:"#{current_user.email}",  placeholder: "example@email.com", class: "form-control" %>
+                        <%= f.email_field :email, required: true, minlength: 6, value:"#{current_user.email}",  placeholder: "example@email.com", class: "form-control" %>
                     </div>
             </div>
 
             <div class="mb-3 row"> 
                 <%= f.label "Name", class: "col-sm-2 col-form-label" %><br/>
                 <div class="col-sm-10">
-                    <%= f.text_field :name, required: true, minlegth: 2, value:"#{current_user.name}", placeholder: "Jpyatachkov", class: "form-control" %>
+                    <%= f.text_field :name, required: true, minlength: 2, value:"#{current_user.name}", placeholder: "Jpyatachkov", class: "form-control" %>
                 </div>
             </div>
 
             <div class="mb-3 row"> 
                 <%= f.label "Surname", class: "col-sm-2 col-form-label" %><br/>
                 <div class="col-sm-10">
-                    <%= f.text_field :surname, required: true, minlegth: 5, value: "#{current_user.surname}", placeholder: "", class: "form-control" %>
+                    <%= f.text_field :surname, required: true, minlength: 2, value: "#{current_user.surname}", placeholder: "", class: "form-control" %>
                 </div>
             </div>
 
             <div class="mb-3 row"> 
                 <%= f.label "Information", class: "col-sm-2 col-form-label" %><br/>
                 <div class="col-sm-10">
-                    <%= f.text_area :information, required: true, minlegth: 2, value: "#{current_user.information}", placeholder: "", class: "form-control" %>
+                    <%= f.text_area :information, required: true, minlength: 2, value: "#{current_user.information}", placeholder: "", class: "form-control" %>
                 </div>
             </div>
             
             <div class="mb-3 row"> 
                 <%= f.label "Password", class: "col-sm-2 col-form-label" %><br/>
                 <div class="col-sm-10">
-                    <%= f.password_field :password, required: true, minlegth: 4,  class: "form-control" %>
+                    <%= f.password_field :password, required: true, minlength: 4,  class: "form-control" %>
                 </div>
             </div>
 
             <div class="mb-3 row"> 
                 <%= f.label "Confirmation password", class: "col-sm-2 col-form-label" %><br/>
                 <div class="col-sm-10">
-                    <%= f.password_field :password_confirmation, required: true, minlegth: 4, class: "form-control" %>
+                    <%= f.password_field :password_confirmation, required: true, minlength: 4, class: "form-control" %>
                 </div>
             </div>
             <%= f.submit "Submit", class: "btn btn-success mb-2" %>

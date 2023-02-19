@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :no_authentication, only: %i[new create]
   before_action :authentication, only: %i[show edit update like]
   before_action :receive_before, only: %i[edit update show]
-  before_action :is_it_possible_to_edit, only: :update
+  before_action :it_possible_to_edit, only: :update
 
   def new
     @user = User.new
@@ -34,26 +34,24 @@ class UsersController < ApplicationController
   def show; end
 
   def index
-    @users = User.all.to_a.reject { |user| current_user&.likes&.include?(user.id) } 
+    @users = User.all.to_a.reject { |user| current_user&.likes&.include?(user.id) }
   end
 
   def like
     liked_user_id = receive_params_for_like
     likes = current_user.likes
 
-    unless likes.include?(liked_user_id)
+    return if likes.include?(liked_user_id)
 
-      likes << liked_user_id
-      current_user.update(likes: likes)
-      liked_user = User.find(liked_user_id)
+    likes << liked_user_id
+    current_user.update(likes: likes)
+    liked_user = User.find(liked_user_id)
 
-      if liked_user.likes.include?(current_user.id)
-        Match.create(users: [current_user, liked_user])
-        redirect_to matches_path
-      else
-        redirect_to users_path
-      end
-      
+    if liked_user.likes.include?(current_user.id)
+      Match.create(users: [current_user, liked_user])
+      redirect_to matches_path
+    else
+      redirect_to users_path
     end
   end
 
@@ -73,11 +71,10 @@ class UsersController < ApplicationController
     params[:id].to_i
   end
 
-  def is_it_possible_to_edit
+  def it_possible_to_edit
     return if current_user == @user
 
     flash[:warning] = 'you can\'t edit other users'
     redirect_to root_path
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MatchesController < ApplicationController
   before_action :receive_before, only: :show
   before_action :no_authentication, only: %i[new create]
@@ -19,7 +21,7 @@ class MatchesController < ApplicationController
     @match.destroy
     flash[:success] = 'The match was successfully deleted'
   end
-  
+
   def receive_before
     @match = Match.find params[:id]
   end
