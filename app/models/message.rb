@@ -3,6 +3,5 @@
 class Message < ApplicationRecord
   belongs_to :match
   belongs_to :user
-  validates :content, presence: true, length: { minimum: 6 }
-  validates :content, length: { minimum: 2 }
+  validates :content, presence: true,length: { minimum: 2 }
 end
