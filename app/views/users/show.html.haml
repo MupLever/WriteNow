@@ -1,0 +1,14 @@
+%h1= "#{@user.name} #{@user.surname}"
+%hr
+.my-3.p-3.bg-body.rounded.shadow-sm
+    .d-flex.text-muted.pt-3
+        %svg.bd-placeholder-img.flex-shrink-0.me-2.rounded{"aria-label" => "Placeholder: 32x32", focusable: "false", height: "32", preserveaspectratio: "xMidYMid slice", role: "img", width: "32", xmlns: "http://www.w3.org/2000/svg"}
+            %title Placeholder
+            %rect{fill: "#007bff", height: "100%", width: "100%"}
+            %text{dy: ".3em", fill: "#007bff", x: "50%", y: "50%"} 32x32
+        .pb-3.mb-0.small.lh-sm.border-bottom.w-100
+            .d-flex.justify-content-between
+                .d-block= "@#{@user.name} #{@user.surname}"
+                %hr
+                = button_to "Like" , like_user_path(@user.id), class: "btn btn-danger"
+            %pre= @user.information

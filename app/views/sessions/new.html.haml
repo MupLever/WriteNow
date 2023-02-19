@@ -1,0 +1,17 @@
+
+
+%h1.mb-4 Authorization
+
+.article
+    .card-body.bg-light.text-dark
+        = form_with url: session_path {:class => "p-2" } do |f|
+            .mb-3row
+                = f.label "Email", { :class => "col-sm-2 col-form-label" }
+                .col-sm-10
+                    = f.email_field :email, required: true, minlength: 6, placeholder: "example@email.com", class: "form-control"
+            .mb-3.row
+                = f.label "Password", { :class => "col-sm-2 col-form-label" }
+                %br
+                .col-sm-10
+                    = f.password_field :password, required: true, minlength: 4, class: "form-control"
+            = f.submit "Log in", { :class => "btn btn-success mb-2" }

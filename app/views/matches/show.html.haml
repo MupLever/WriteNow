@@ -1,0 +1,31 @@
+%h1 Match
+%hr
+.my-3.p-3.bg-body.rounded.shadow-sm
+    - @messages.each do |message|
+        - if message.user == current_user
+            .d-flex.text-muted.pt-3
+                %svg.bd-placeholder-img.flex-shrink-0.me-2.rounded{"aria-label" => "Placeholder: 32x32", :focusable => "false", :height => "32", :preserveaspectratio => "xMidYMid slice", :role => "img", :width => "32", :xmlns => "http://www.w3.org/2000/svg"}
+                    %title Placeholder
+                    %rect{:fill => "#007bff", :height => "100%", :width => "100%"}
+                    %text{:dy => ".3em", :fill => "#007bff", :x => "50%", :y => "50%"} 32x32
+                %p.pb-3.mb-0.small.lh-sm.border-bottom
+                    %strong.d-block.text-gray-dark
+                        = "@#{message.user.name}"
+                    = "#{message.content}"
+        - else
+            .d-flex.text-muted.pt-3
+                %svg.bd-placeholder-img.flex-shrink-0.me-2.rounded{"aria-label" => "Placeholder: 32x32", :focusable => "false", :height => "32", :preserveaspectratio => "xMidYMid slice", :role => "img", :width => "32", :xmlns => "http://www.w3.org/2000/svg"}
+                    %title Placeholder
+                    %rect{:fill => "#e83e8c", :height => "100%", :width => "100%"}
+                    %text{:dy => ".3em", :fill => "#e83e8c", :x => "50%", :y => "50%"} 32x32
+                %p.pb-3.mb-0.small.lh-sm.border-bottom
+                    %strong.d-block.text-gray-dark
+                        = "@#{message.user.name}"
+                    = "#{message.content}"
+
+= form_with model: [@match, @message], class: "card p-2", remote: true do |form|
+    .input-group
+        .col-sm-10
+            = form.text_area :content, required: true, minlength: 4, placeholder: "What are you doing?", class: "form-control"
+    .mt-3
+        = form.submit "Submit", class: "btn btn-success"

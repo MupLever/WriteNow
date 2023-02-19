@@ -1,0 +1,24 @@
+
+- if signed_in? 
+    %h1 Users
+    - @users.each do |user|
+        - unless user.id == current_user.id
+            .my-3.p-3.bg-body.rounded.shadow-sm
+                %h6.border-bottom.pb-2.mb-0
+                    = "#{user.name} #{user.surname}"
+                .d-flex.text-muted.pt-3
+                    %svg.bd-placeholder-img.flex-shrink-0.me-2.rounded{"aria-label" => "Placeholder: 32x32", focusable: "false", height: "32", preserveaspectratio: "xMidYMid slice", role: "img", width: "32", xmlns: "http://www.w3.org/2000/svg"}
+                        %title Placeholder
+                        %rect{fill: "#007bff", height: "100%", width: "100%"}
+                        %text{dy: ".3em", fill: "#007bff", x: "50%", y: "50%"} 32x32
+
+                    .pb-3.mb-0.small.lh-sm.border-bottom.w-100
+                        .d-flex.justify-content-between
+                            %strong.text-gray-dar
+                                = link_to "#{user.name} #{user.surname}", user_path(user.id), class: "nav-link px-2 text-dark"
+                            = button_to "Like" , like_user_path(user.id), class: "btn btn-danger"
+
+
+- else
+    %p>
+        = link_to "Not registered yet? Then click", new_user_path, class: "nav-link px-2 text-primary"

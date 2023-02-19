@@ -14,7 +14,7 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @matches = current_user.matches.all
+    @matches = current_user.matches.includes(:users)
   end
 
   def destroy
