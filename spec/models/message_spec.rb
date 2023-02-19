@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe Message, type: :model do
-    context "test vlidation model message" do
+    context "test validation model message" do
         it "ensure content is present" do
             first_user = User.new email: "mail@mail.ru", name: "Jpytachok", surname: "Jpytachkov", password: "qwerty"
             second_user = User.new email: "mail@gmail.ru", name: "Jpytachok", surname: "Jpytachkov", password: "qwerty"

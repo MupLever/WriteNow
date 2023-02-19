@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe User, type: :model do
-    context "test vlidation model user" do
+    context "test validation model user" do
         it "ensure email is present" do
             user = User.new name: "Jpytachok", surname: "Jpytachkov", password: "qwerty"
             expect(user.valid?).to eq(false)
