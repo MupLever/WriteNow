@@ -17,11 +17,6 @@ class MatchesController < ApplicationController
     @matches = current_user.matches.includes(:users)
   end
 
-  def destroy
-    @match.destroy
-    flash[:success] = 'The match was successfully deleted'
-  end
-
   def receive_before
     @match = Match.find params[:id]
   end
