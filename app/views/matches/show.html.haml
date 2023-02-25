@@ -26,6 +26,6 @@
 = form_with model: [@match, @message], class: "card p-2", remote: true do |form|
     .input-group
         .col-sm-10
-            = form.text_area :content, required: true, minlength: 4, placeholder: "What are you doing?", class: "form-control"
+            = form.text_area :content, required: true, minlength: 1, placeholder: "What are you doing?", class: "form-control"
     .mt-3
         = form.submit "Submit", class: "btn btn-success"
