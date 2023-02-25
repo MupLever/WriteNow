@@ -28,16 +28,16 @@
                 .col-sm-10
                     = f.text_area :information, required: true, minlength: 2, value: "#{current_user.information}", placeholder: "", class: "form-control"
 
-            .mb-3.row
-                = f.label "Password", class: "col-sm-2 col-form-label"
-                %br
-                .col-sm-10
-                    = f.password_field :password, required: true, minlength: 4,  class: "form-control"
+            -# .mb-3.row
+            -#     = f.label "Password", class: "col-sm-2 col-form-label"
+            -#     %br
+            -#     .col-sm-10
+            -#         = f.password_field :password, required: true, minlength: 4,  class: "form-control"
 
 
-            .mb-3.row
-                = f.label "Confirmation password", class: "col-sm-2 col-form-label"
-                %br
-                .col-sm-10
-                    = f.password_field :password_confirmation, required: true, minlength: 4, class: "form-control"
+            -# .mb-3.row
+            -#     = f.label "Confirmation password", class: "col-sm-2 col-form-label"
+            -#     %br
+            -#     .col-sm-10
+            -#         = f.password_field :password_confirmation, required: true, minlength: 4, class: "form-control"
             = f.submit "Submit", class: "btn btn-success mb-2"

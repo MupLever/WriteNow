@@ -1,7 +1,7 @@
 %h1 Matches
 - @matches.each do |match|
     %span{:hidden => "until-found"}
-        = user = match.users.reject { |user| user == current_user}.first
+        = user = match.users.detect { |user| user != current_user}
     .my-3.p-3.bg-body.rounded.shadow-sm
         %h1
             = link_to "#{user.name} #{user.surname}", match_path(match), class: "btn btn-light text-dark me-2"

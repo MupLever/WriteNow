@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :no_authentication, only: %i[new create]
   before_action :authentication, only: %i[show edit update like]
   before_action :receive_before, only: %i[edit update show]
-  before_action :it_possible_to_edit, only: :update
+  before_action :authorization, only: %i[update edit]
 
   def new
     @user = User.new
@@ -52,14 +52,14 @@ class UsersController < ApplicationController
   end
 
   def receive_params_for_update
-    params.require(:user).permit(:email, :name, :surname, :information, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :surname, :information)
   end
 
   def receive_liked_user_id
     params[:id].to_i
   end
 
-  def it_possible_to_edit
+  def authorization
     return if current_user == @user
 
     flash[:warning] = 'you can\'t edit other users'

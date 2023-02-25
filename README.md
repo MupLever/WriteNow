@@ -1,4 +1,4 @@
-# WriteNow
+# WriteNow MVP
 Dating site, an analogue of tinder, but for friends
 
 # Ruby version
