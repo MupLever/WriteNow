@@ -8,8 +8,7 @@ class MatchesController < ApplicationController
   def create; end
 
   def show
-    @messages = @match.messages
-
+    @messages = @match.messages.includes(:user)
     @message = Message.new
   end
 

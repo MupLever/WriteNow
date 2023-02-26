@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def show; end
 
   def index
-    @users = User.all.to_a.reject { |user| current_user&.likes&.include?(user.id) }
+    @users = User.all.reject { |user| current_user&.likes&.include?(user.id) }
   end
 
   def like
